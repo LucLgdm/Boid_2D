@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
-#include <SFML/Graphics.hpp>
 
+#include <SFML/Graphics.hpp>
 #include "Boid.h"
 
 int main() {
@@ -12,7 +12,14 @@ int main() {
 
     // Créer une fenêtre SFML
     sf::RenderWindow window(sf::VideoMode(width, height), "Boids");
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(50);
+    
+    // Creation du troupeau
+    vector<Boid> flock;
+
+    for (int i = 0; i < 100; i++) {
+        flock.push_back(Boid(rand() % 800, rand() % 600));
+    }
 
     // Boucle principale
     while (window.isOpen()) {
@@ -24,29 +31,17 @@ int main() {
                 window.close();
             }
         }
-        vector<Boid> flock;
-
-        for (int i = 0; i < 10; i++) {
-            flock.push_back(Boid(rand() % 800, rand() % 600));
-        }
-
-        for (int i = 0; i < 1000; i++) {
-            for (auto& boid : flock) {
-                boid.update(flock);
-            }
-        }
-
         // Effacer l'écran (avec une couleur de fond blanc)
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::Blue);
+
+        for (auto& boid : flock) {
+            boid.update(flock, width, height);
+            boid.draw(window);
+        }
+        
         // Afficher ce qui a été dessiné
         window.display();
 
     }
-
-
-
-
-	
-
 	return 0;
 }

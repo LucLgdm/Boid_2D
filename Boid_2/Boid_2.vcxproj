@@ -134,7 +134,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boid.cpp" />
-    <ClCompile Include="FourreTout.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
